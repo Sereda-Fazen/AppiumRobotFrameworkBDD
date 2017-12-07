@@ -1,6 +1,7 @@
 *** Settings ***
 #Library           AppiumLibrary    timeout=50
 Library           keywords.py
+Library           plugins.py
 
 
 *** Variables ***
@@ -443,13 +444,11 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 
 
-### в конец
+### Поиск
 
-#На вкладке меню перейти к блоку "Приложения первого канала"
-#  Перейти в разделы (гамбургер)
-#Нажать на любое приложение из списка
-#  click_id      com.ipspirates.ort:id/nav_fav_item_title
-#Открывается страница в PlayMarket для установки выбранного МП
+Поиск многопоточный в телепроекте
+  click id              com.ipspirates.ort:id/action_episodes_search
+  search                com.ipspirates.ort:id/search_src_text
 
 
 

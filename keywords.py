@@ -19,16 +19,16 @@ from selenium.webdriver.support import expected_conditions as EC
 # "file=@/home/alex/Robot Framework/MobileTest/app/Первый_com.apk
 
 
-desired_caps_br = {
-    "build": "First Channel",
-    "realMobile": True,
-    "device": "Samsung Galaxy S7",
-    "app": "bs://a3f8e80e6bb690d064b18a64197b7d9bc3ef369b",
-    "browserstack.debug": True,
-    "browserstack.video": True
-}
-driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
-                          desired_caps_br)
+# desired_caps_br = {
+#     "build": "First Channel",
+#     "realMobile": True,
+#     "device": "Samsung Galaxy S7",
+#     "app": "bs://a3f8e80e6bb690d064b18a64197b7d9bc3ef369b",
+#     "browserstack.debug": True,
+#     "browserstack.video": True
+# }
+# driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
+#                           desired_caps_br)
 
 
 desired_caps = {}
