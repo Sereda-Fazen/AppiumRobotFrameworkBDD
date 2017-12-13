@@ -90,7 +90,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   show text               //android.widget.TextView[@text='Нашли ошибку?']
   show text               //android.widget.TextView[@text='СООБЩИТЬ ОБ ОШИБКЕ']
   show text               //android.widget.TextView[@text='Понравилось приложение?']
-  scroll_to_element               ОСТАВИТЬ ОТЗЫВ
+  scroll_to               ОСТАВИТЬ ОТЗЫВ
   show text               //android.widget.Button[@text='ОСТАВИТЬ ОТЗЫВ']
 
 

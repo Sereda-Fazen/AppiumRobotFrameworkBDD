@@ -14,26 +14,26 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 
-desired_caps_br = {
-    "build": "First Channel",
-    "realMobile": True,
-    "device": "Google Nexus 6",
-    "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
-    "browserstack.debug": True,
-    "browserstack.video": True
-}
-driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
-                          desired_caps_br)
+# desired_caps_br = {
+#     "build": "First Channel",
+#     "realMobile": True,
+#     "device": "Google Nexus 6",
+#     "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+#     "browserstack.debug": True,
+#     "browserstack.video": True
+# }
+# driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
+#                           desired_caps_br)
 
 
-# desired_caps = {}
-# desired_caps['platformName'] = 'Android'
-# desired_caps['platformVersion'] = '6.0'
-# desired_caps['deviceName'] = 'Android Emulator'
-# desired_caps['unicodeKeyboard'] = 'True'
-# desired_caps['app'] = '/home/alex/Robot Framework/First/app/Первый.apk'
-# desired_caps['resetKeyboard'] = 'True'
-# driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+desired_caps = {}
+desired_caps['platformName'] = 'Android'
+desired_caps['platformVersion'] = '6.0'
+desired_caps['deviceName'] = 'Android Emulator'
+desired_caps['unicodeKeyboard'] = 'True'
+desired_caps['app'] = '/home/alex/Robot Framework/First/app/Первый.apk'
+desired_caps['resetKeyboard'] = 'True'
+driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
 
 
 def andr_click(click_main):
@@ -118,9 +118,9 @@ def element_does_not_contain(elem):
         raise
 
 
-def scroll_to_element(el):
-    driver.find_element_by_android_uiautomator(
-        'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text('+el+').instance(0));')
+# def scroll_to_element(el):
+#     driver.find_element_by_android_uiautomator(
+#         'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text('+el+').instance(0));')
 
 
 def make_screen(screens):
