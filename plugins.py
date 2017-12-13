@@ -31,6 +31,9 @@ def search(id_news, item, episod, name, title):
 
 
 
+# def scroll_to(t):
+#     _ = 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("%s").instance(0));' % t
+#     driver.find_element_by_android_uiautomator(_.encode('utf8'))
+
 def scroll_to(t):
-    _ = 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("%s").instance(0));' % t
-    driver.find_element_by_android_uiautomator(_.encode('utf8'))
+    driver.find_element_by_android_uiautomator = 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("%s").instance(0));' % t
