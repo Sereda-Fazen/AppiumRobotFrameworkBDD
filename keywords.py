@@ -1,29 +1,24 @@
 # coding=utf8
 import os
 from time import sleep
-
-from appium.webdriver.common.touch_action import TouchAction
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
-from django.views.decorators.http import condition, logger
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from selenium.common.exceptions import NoSuchElementException
 
-# curl - u
-# "eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi" - X
-# POST
-# https: // api.browserstack.com / app - automate / upload - F
-# "file=@/home/alex/Robot Framework/MobileTest/app/Первый_com.apk
+# curl -u "eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi" -X POST "https://api.browserstack.com/app-automate/upload" -F "file=@/home/alex/Robot Framework/AppiumRobotFrameworkBDD/app/Первый.apk"
+
 
 
 # desired_caps_br = {
 #     "build": "First Channel",
 #     "realMobile": True,
-#     "device": "Samsung Galaxy S7",
-#     "app": "bs://a3f8e80e6bb690d064b18a64197b7d9bc3ef369b",
+#     "device": "Google Nexus 6",
+#     "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
 #     "browserstack.debug": True,
 #     "browserstack.video": True
 # }
@@ -37,7 +32,7 @@ desired_caps['platformVersion'] = '6.0'
 desired_caps['deviceName'] = 'Android Emulator'
 desired_caps['unicodeKeyboard'] = 'True'
 desired_caps['app'] = '/home/alex/Robot Framework/First/app/Первый.apk'
-
+desired_caps['resetKeyboard'] = 'True'
 driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
 
 
@@ -102,15 +97,48 @@ def send_text(id_news, text):
         raise
 
 
-def scroll_to(el):
-    driver.find_element_by_android_uiautomator(
-        'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("'+el+'").instance(0));')
+def input(id, text):
+    address = driver.find_element_by_id(id)
+    address.send_keys(text)
+
+
+def clear_field(loc):
+    clear = driver.find_element_by_id(loc).clear()
+
+
+def element_does_not_contain(elem):
+    try:
+        wait_el = WebDriverWait(driver, 5).until(
+          EC.invisibility_of_element_located((By.NAME, elem)),
+          message="Element - '" + elem + "' is not visible in 20 seconds")
+    except:
+        directory = '%s/Results/Errors/' % os.getcwd()
+        file_name = '1.png'
+        driver.save_screenshot(directory + file_name)
+        raise
+
+
+# def scroll_to_element(el):
+#     driver.find_element_by_android_uiautomator(
+#         'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text('+el+').instance(0));')
 
 
 def make_screen(screens):
     directory = '%s/Results/Screens/' % os.getcwd()
     file_name = screens
     driver.save_screenshot(directory + file_name)
+
+
+def check_load(loc1, loc2):
+     try:
+      cancel_load = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((MobileBy.XPATH, loc1)),
+        message="Element - '" + loc1 + "' did not appear in 20 seconds")
+     except:
+      remove_load = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((MobileBy.XPATH, loc2)),
+        message="Element - '" + loc2 + "' did not appear in 20 seconds")
+
 
 
 
@@ -125,3 +153,4 @@ def driver_wait():
 
 def driver_go_back():
     driver.back()
+

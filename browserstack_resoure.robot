@@ -1,5 +1,5 @@
 *** Settings ***
-#Library           AppiumLibrary    timeout=50
+Library           AppiumLibrary    timeout=50
 Library           keywords.py
 Library           plugins.py
 
@@ -65,8 +65,8 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   click id         com.ipspirates.ort:id/buttonDefaultPositive
   driver_wait
 
-Подтверждение об отмене
-  show text             //android.widget.TextView[@text='Отменить текущую загрузку?']
+Подтверждение об отмене / удалить
+  check_load             //android.widget.TextView[@text='Отменить текущую загрузку?']                //android.widget.TextView[@text='Удалить видео с устройства?']
   click id         com.ipspirates.ort:id/buttonDefaultPositive
   driver_wait
 
@@ -91,14 +91,14 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   show text               //android.widget.TextView[@text='СООБЩИТЬ ОБ ОШИБКЕ']
   show text               //android.widget.TextView[@text='Понравилось приложение?']
   scroll_to               ОСТАВИТЬ ОТЗЫВ
-  show text                //android.widget.Button[@text='ОСТАВИТЬ ОТЗЫВ']
+  show text               //android.widget.Button[@text='ОСТАВИТЬ ОТЗЫВ']
 
 
 Нажать на кнопку "Оставить отзыв"
   andr click             //android.widget.Button[@text='ОСТАВИТЬ ОТЗЫВ']
 
 Открывается PlayMarket/AppleStore для оценки приложения
-  show text id             com.android.browser:id/url
+  #show text id             com.android.browser:id/url
   driver wait
   make_screen              PlayMarket.png
 
@@ -108,7 +108,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 На вкладке меню перейти к блоку "Приложения первого канала"
   click id                com.ipspirates.ort:id/nav_fav_item_title
 Нажать на любое приложение из списка
-  show text id             com.android.browser:id/url
+  #show text id             com.android.browser:id/url
   driver wait
   make_screen              AppFirstChannel.png
 
@@ -156,7 +156,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 Поиск по эпизодам
   click id              com.ipspirates.ort:id/action_episodes_search
-  send text                        com.ipspirates.ort:id/search_src_text           Ургант
+  input                       com.ipspirates.ort:id/search_src_text              Ургант
   Перейти в раздел телепроекта
 
 
@@ -172,7 +172,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 
 Я вернулся назад
-  andr click          //android.view.ViewGroup/android.widget.ImageButton
+  andr click          //android.widget.ImageButton
 
 Вернулся
   driver go back
@@ -218,7 +218,6 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 В плеере нажать на видео еще раз
   click id           com.ipspirates.ort:id/video_panel
-  Нажать паузу
 Повторно нажать на видео
   Нажать возпроизведение
 Я увидел линию новости
@@ -245,7 +244,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   Первый телепроект
 Я нажал на любое видео из ленты выбранного телепроекта
   Поиск
-  send text                        com.ipspirates.ort:id/search_src_text           Ургант
+  input                        com.ipspirates.ort:id/search_src_text           Ургант
   click id           com.ipspirates.ort:id/item_teleprj_title
   Закрыть поиск
 
@@ -257,8 +256,8 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   Нажать паузу
 Я Повторно нажал на видео
   Нажать возпроизведение
-  Я вернулся назад
-  Я вернулся назад
+  Вернулся
+  Вернулся
 
 
 
@@ -283,17 +282,18 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   show text               //android.widget.TextView[@text="Всё видео"]
   show_text_id                  com.ipspirates.ort:id/item_tele_episode_title
 
-В выпадающем списке выбрать рубрику - Выпуски и лучшие моменты
+В выпадающем списке выбрать рубрику - Выпуски
   click_id        com.ipspirates.ort:id/action_change_rubrics
-  andr click          //android.widget.TextView[@text='Выпуски и лучшие моменты']
-  show text               //android.widget.TextView[@text="Выпуски и лучшие моменты"]
+  andr click          //android.widget.TextView[@text='Выпуски']
+  show text               //android.widget.TextView[@text="Выпуски"]
   show_text_id                  com.ipspirates.ort:id/item_tele_episode_title
 
-В выпадающем списке выбрать рубрику - О проекте
+В выпадающем списке выбрать рубрику - Монолог
   click_id        com.ipspirates.ort:id/action_change_rubrics
-  andr click           //android.widget.TextView[@text='О проекте']
-  show text               //android.widget.TextView[@text="О проекте"]
+  andr click           //android.widget.TextView[@text='Монолог']
+  show text               //android.widget.TextView[@text="Монолог"]
   show_text_id                  com.ipspirates.ort:id/item_tele_episode_title
+
 
 #Wait Element And Click                [Arguments]                  ${locator}
 #    Sleep                           1 sec
@@ -443,13 +443,38 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 
 
+### Пярмой эфир
+
+Нажал на Прямой эфир
+  click id           com.ipspirates.ort:id/nav_drawer_item_live_streaming
+
+Проверка что перемотки нет
+  element_does_not_contain           com.ipspirates.ort:id/ad_seek_bar_panel
+
+
 
 ### Поиск
 
-Поиск многопоточный в телепроекте
+Поиск многопоточный в телепроекте - Голос
   click id              com.ipspirates.ort:id/action_episodes_search
-  search                com.ipspirates.ort:id/search_src_text
+  search                com.ipspirates.ort:id/search_src_text          item           episod     name       title
 
+
+Поиск многопоточный в телепроекте - 22.11.17
+  clear_field           com.ipspirates.ort:id/action_episodes_search
+  click id              com.ipspirates.ort:id/action_episodes_search
+  search                com.ipspirates.ort:id/search_src_text          item2           episod2     name2       title2
+
+Поиск многопоточный в телепроекте - Владимир Познер
+  clear_field           com.ipspirates.ort:id/action_episodes_search
+  click id              com.ipspirates.ort:id/action_episodes_search
+  search                com.ipspirates.ort:id/search_src_text          item3           episod3     name3       title3
+
+Поиск многопоточный в телепроекте - 899 выпуск
+  clear_field           com.ipspirates.ort:id/action_episodes_search
+  click id              com.ipspirates.ort:id/action_episodes_search
+  search                com.ipspirates.ort:id/search_src_text          item4           episod4     name4       title4
+  clear_field           com.ipspirates.ort:id/action_episodes_search
 
 
 Приложение закрылось

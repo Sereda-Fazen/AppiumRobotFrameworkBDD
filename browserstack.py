@@ -84,7 +84,7 @@ def send_text(id_news, text):
         wait = WebDriverWait(driver, 5).until(
             EC.element_to_be_clickable((MobileBy.ID, id_news)),
             message="Element - '" + id_news + "' did not appear in 20 seconds")
-        wait.send_keys(text)
+        wait.send_keys_to_element(text)
     except:
         directory = '%s/Results/Errors/' % os.getcwd()
         file_name = '1.png'
