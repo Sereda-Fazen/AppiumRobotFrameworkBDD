@@ -118,9 +118,6 @@ def element_does_not_contain(elem):
         raise
 
 
-# def scroll_to_element(el):
-#     driver.find_element_by_android_uiautomator(
-#         'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text('+el+').instance(0));')
 
 
 def make_screen(screens):

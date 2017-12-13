@@ -90,7 +90,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   show text               //android.widget.TextView[@text='Нашли ошибку?']
   show text               //android.widget.TextView[@text='СООБЩИТЬ ОБ ОШИБКЕ']
   show text               //android.widget.TextView[@text='Понравилось приложение?']
-  scroll_to               ОСТАВИТЬ ОТЗЫВ
+  andr_sc                 ОСТАВИТЬ ОТЗЫВ
   show text               //android.widget.Button[@text='ОСТАВИТЬ ОТЗЫВ']
 
 
@@ -216,8 +216,13 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 Просмотреть рекламу и нажать кнопку "Пропустить"
   Пропустить
 
+В плеере нажать на видео прямой эфир
+  click id                com.ipspirates.ort:id/live_stream_controls
+
+
 В плеере нажать на видео еще раз
-  click id           com.ipspirates.ort:id/video_panel
+  click id              com.ipspirates.ort:id/video_panel
+
 Повторно нажать на видео
   Нажать возпроизведение
 Я увидел линию новости
@@ -290,8 +295,8 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 В выпадающем списке выбрать рубрику - Монолог
   click_id        com.ipspirates.ort:id/action_change_rubrics
-  andr click           //android.widget.TextView[@text='Монолог']
-  show text               //android.widget.TextView[@text="Монолог"]
+  andr click           //android.widget.TextView[@text='О проекте']
+  show text               //android.widget.TextView[@text="О проекте"]
   show_text_id                  com.ipspirates.ort:id/item_tele_episode_title
 
 
