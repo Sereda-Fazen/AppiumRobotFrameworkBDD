@@ -17,7 +17,7 @@ from selenium.common.exceptions import NoSuchElementException
 desired_caps_br = {
     "build": "First Channel",
     "realMobile": True,
-    "device": "Google Nexus 6",
+    "device": "Samsung Galaxy S7",
     "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
     "browserstack.debug": True,
     "browserstack.video": True
