@@ -8,6 +8,9 @@
   },
 
   {
+
+    // 12
+
     "build": "Samsung Galaxy S6",
     "realMobile": true,
     "device": "Samsung Galaxy S6" ,
