@@ -38,7 +38,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 
-device = "Samsung Galaxy S6"
+device = "Samsung Galaxy S7"
 
 desired_caps_br = {
     "build": device,
