@@ -19,7 +19,7 @@ import json
 from pprint import pprint
 
 
-class Browserstack(object):
+class Browserstack():
 
     driver = None
 
@@ -34,7 +34,7 @@ class Browserstack(object):
         }
         if cls.driver is None:
             cls.driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com'
-                                          '/wd/hub',desired_caps_br)
+                                          '/wd/hub', desired_caps_br)
         return super().__new__(cls, build, device)
 
     def __init__(self, build, device):
