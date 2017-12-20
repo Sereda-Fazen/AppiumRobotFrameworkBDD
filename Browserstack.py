@@ -35,7 +35,7 @@ class Browserstack(object):
         if cls.driver is None:
             cls.driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com'
                                           '/wd/hub',desired_caps_br)
-        return super(Browserstack, cls).__new__(cls, build, device)
+        return super().__new__(cls, build, device)
 
     def __init__(self, build, device):
         pass
