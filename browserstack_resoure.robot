@@ -1,15 +1,15 @@
 *** Settings ***
 Library           AppiumLibrary    timeout=50
-#Library           Browserstack.py
-Library            keywords.py
-Library           plugins.py
-#Library           tests.py
+Library           Browserstack.py
+#Library            keywords.py
+#Library           plugins.py
 *** Variables ***
 ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 *** Keywords ***
 
-
+TEST
+ con
 
 
 

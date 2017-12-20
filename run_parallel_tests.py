@@ -9,7 +9,7 @@ with open(json_name, "r") as f:
 num_of_tests = len(obj)
 process = []
 for counter in range(num_of_tests):
-    cmd = "python " + str(file_name) + " " + str(json_name) + " " + str(counter)
+    cmd = "robot " + str(file_name) + " " + str(json_name) + " " + str(counter)
     process.append(subprocess.Popen(cmd, shell=True))
 
 for counter in range(num_of_tests):

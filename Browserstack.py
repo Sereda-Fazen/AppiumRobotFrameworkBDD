@@ -14,36 +14,38 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.common.exceptions import NoSuchElementException
 
-
 # curl -u "eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi" -X POST "https://api.browserstack.com/app-automate/upload" -F "file=@/home/alex/Robot Framework/AppiumRobotFrameworkBDD/app/Первый.apk"
+import json
+from pprint import pprint
 
 
 class Browserstack():
-    # def __init__(self, device, build):
-    #     self._conn = desired_caps_br = {
-    #         "build": build,
-    #         "realMobile": True,
-    #         "device": device,
-    #         "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
-    #         "browserstack.debug": True,
-    #         "browserstack.video": True
-    #     }
-    #     self.driver = webdriver.Remote(
-    #         'http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
-    #         desired_caps_br)
 
-    def connect(self, device):
-        desired_caps = {
-            "unicodeKeyboard": True,
-            "platformName": 'Android',
-            "deviceName": device,
-            "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk",
-            "resetKeyboard": True
+    def __init__(self, device, build):
+        self._conn = desired_caps_br = {
+            "build": build,
+            "realMobile": True,
+            "device": device,
+            "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+            "browserstack.debug": True,
+            "browserstack.video": True
         }
-
         self.driver = webdriver.Remote(
-            'http://0.0.0.0:4723/wd/hub',
-            desired_caps)
+            'http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
+            desired_caps_br)
+
+    # def __init__(self):
+    #     self._run = desired_caps = {
+    #         "unicodeKeyboard": True,
+    #         "platformName": 'Android',
+    #         "deviceName": "Android Emulator",
+    #         "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk",
+    #         "resetKeyboard": True
+    #     }
+
+        # self.driver = webdriver.Remote(
+        #     'http://0.0.0.0:4723/wd/hub',
+        #     desired_caps)
 
     def andr_click(self, click_main):
         try:
@@ -179,4 +181,4 @@ class Browserstack():
         for x in range(100):
             self.driver.background_app(2)
 
-#
+

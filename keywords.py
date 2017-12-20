@@ -29,21 +29,6 @@ from selenium.common.exceptions import NoSuchElementException
 #                           desired_caps_br)
 
 # desired_caps = {}
-# desired_caps['platformName'] = data[0]['platformName']
-# desired_caps['platformVersion'] = '6.0'
-# desired_caps['deviceName'] = data[0]['deviceName']
-# desired_caps['unicodeKeyboard'] = 'True'
-# desired_caps['app'] = data[0]['app']
-# desired_caps['resetKeyboard'] = 'True'
-# driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
-
-
-
-import json
-
-
-
-# desired_caps = {}
 # desired_caps['unicodeKeyboard'] = 'True'
 # desired_caps['platformName'] = 'Android'
 # desired_caps['deviceName'] = 'Android Emulator'
@@ -53,17 +38,18 @@ import json
 
 
 
+device = "Samsung Galaxy S6"
+
 desired_caps_br = {
-    "build": "Samsung Galaxy S6",
+    "build": device,
     "realMobile": True,
-    "device": "Samsung Galaxy S6",
-    "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+    "device": device,
+    "app": "bs://3b63bdd1e432d0a09072a320542c9d0b707b5841",
     "browserstack.debug": True,
     "browserstack.video": True
 }
 driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
                           desired_caps_br)
-
 
 
 def andr_click(click_main):
@@ -80,9 +66,9 @@ def andr_click(click_main):
 
 def show_text(loc):
     try:
-     text_sh = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((MobileBy.XPATH, loc)),
-        message="Element - '" + loc + "' did not appear in 20 seconds")
+        text_sh = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((MobileBy.XPATH, loc)),
+            message="Element - '" + loc + "' did not appear in 20 seconds")
     except:
         directory = '%s/Results/Errors/' % os.getcwd()
         file_name = '1.png'
@@ -92,9 +78,9 @@ def show_text(loc):
 
 def show_text_id(loc):
     try:
-     text_id = WebDriverWait(driver, 40).until(
-        EC.element_to_be_clickable((MobileBy.ID, loc)),
-        message="Element - '" + loc + "' did not appear in 20 seconds")
+        text_id = WebDriverWait(driver, 40).until(
+            EC.element_to_be_clickable((MobileBy.ID, loc)),
+            message="Element - '" + loc + "' did not appear in 20 seconds")
     except:
         directory = '%s/Results/Errors/' % os.getcwd()
         file_name = '1.png'
@@ -139,15 +125,13 @@ def clear_field(loc):
 def element_does_not_contain(elem):
     try:
         wait_el = WebDriverWait(driver, 5).until(
-          EC.invisibility_of_element_located((By.NAME, elem)),
-          message="Element - '" + elem + "' is not visible in 20 seconds")
+            EC.invisibility_of_element_located((By.NAME, elem)),
+            message="Element - '" + elem + "' is not visible in 20 seconds")
     except:
         directory = '%s/Results/Errors/' % os.getcwd()
         file_name = '1.png'
         driver.save_screenshot(directory + file_name)
         raise
-
-
 
 
 def make_screen(screens):
@@ -157,14 +141,14 @@ def make_screen(screens):
 
 
 def check_load(loc1, loc2):
-     try:
-      cancel_load = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((MobileBy.XPATH, loc1)),
-        message="Element - '" + loc1 + "' did not appear in 20 seconds")
-     except:
-      remove_load = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((MobileBy.XPATH, loc2)),
-        message="Element - '" + loc2 + "' did not appear in 20 seconds")
+    try:
+        cancel_load = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((MobileBy.XPATH, loc1)),
+            message="Element - '" + loc1 + "' did not appear in 20 seconds")
+    except:
+        remove_load = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((MobileBy.XPATH, loc2)),
+            message="Element - '" + loc2 + "' did not appear in 20 seconds")
 
 
 def driver_quite():
@@ -177,4 +161,3 @@ def driver_wait():
 
 def driver_go_back():
     driver.back()
-

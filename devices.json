@@ -5,5 +5,23 @@
     "deviceName": "Android Emulator",
     "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk",
     "resetKeyboard": true
+  },
+
+  {
+    "build": "Samsung Galaxy S6",
+    "realMobile": true,
+    "device": "Samsung Galaxy S6" ,
+    "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+    "browserstack.debug": true,
+    "browserstack.video": true
+  },
+
+  {
+    "build": "Samsung Galaxy S7",
+    "realMobile": true,
+    "device": "Samsung Galaxy S7" ,
+    "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+    "browserstack.debug": true,
+    "browserstack.video": true
   }
 ]
