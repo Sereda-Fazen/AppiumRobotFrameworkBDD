@@ -54,9 +54,9 @@ import json
 
 
 desired_caps_br = {
-    "build": "Samsung Galaxy S7",
+    "build": "Samsung Galaxy S6",
     "realMobile": True,
-    "device": "SamsungGalaxyS7",
+    "device": "Samsung Galaxy S6",
     "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
     "browserstack.debug": True,
     "browserstack.video": True
