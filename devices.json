@@ -1,0 +1,9 @@
+[
+  {
+    "unicodeKeyboard": true,
+    "platformName": "Android",
+    "deviceName": "Android Emulator",
+    "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk",
+    "resetKeyboard": true
+  }
+]

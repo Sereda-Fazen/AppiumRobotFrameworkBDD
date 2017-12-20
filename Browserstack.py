@@ -1,6 +1,7 @@
 # coding=utf8
 import os
 from time import sleep
+from xml.dom import minidom
 
 from SeleniumLibrary.keywords import element
 from appium import webdriver
@@ -17,20 +18,32 @@ from selenium.common.exceptions import NoSuchElementException
 # curl -u "eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi" -X POST "https://api.browserstack.com/app-automate/upload" -F "file=@/home/alex/Robot Framework/AppiumRobotFrameworkBDD/app/Первый.apk"
 
 
-class Browserstack(object):
+class Browserstack():
+    # def __init__(self, device, build):
+    #     self._conn = desired_caps_br = {
+    #         "build": build,
+    #         "realMobile": True,
+    #         "device": device,
+    #         "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+    #         "browserstack.debug": True,
+    #         "browserstack.video": True
+    #     }
+    #     self.driver = webdriver.Remote(
+    #         'http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
+    #         desired_caps_br)
 
-    def __init__(self, device, build):
-        self._conn = desired_caps_br = {
-            "build": build,
-            "realMobile": True,
-            "device": device,
-            "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
-            "browserstack.debug": True,
-            "browserstack.video": True
+    def connect(self, device):
+        desired_caps = {
+            "unicodeKeyboard": True,
+            "platformName": 'Android',
+            "deviceName": device,
+            "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk",
+            "resetKeyboard": True
         }
+
         self.driver = webdriver.Remote(
-            'http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
-            desired_caps_br)
+            'http://0.0.0.0:4723/wd/hub',
+            desired_caps)
 
     def andr_click(self, click_main):
         try:
@@ -73,7 +86,7 @@ class Browserstack(object):
         except:
             directory = '%s/Results/Errors/' % os.getcwd()
             file_name = '1.png'
-            driver.save_screenshot(directory + file_name)
+            self.driver.save_screenshot(directory + file_name)
             raise
 
     def send_text(self, id_news, text):
@@ -88,14 +101,14 @@ class Browserstack(object):
             self.driver.save_screenshot(directory + file_name)
             raise
 
-    def input(self,id, text):
+    def input(self, id, text):
         address = self.driver.find_element_by_id(id)
         address.send_keys(text)
 
-    def clear_field(self,loc):
+    def clear_field(self, loc):
         clear = self.driver.find_element_by_id(loc).clear()
 
-    def element_does_not_contain(self,elem):
+    def element_does_not_contain(self, elem):
         try:
             wait_el = WebDriverWait(self.driver, 5).until(
                 EC.invisibility_of_element_located((By.NAME, elem)),
@@ -106,7 +119,7 @@ class Browserstack(object):
             self.driver.save_screenshot(directory + file_name)
             raise
 
-    def make_screen(self,screens):
+    def make_screen(self, screens):
         directory = '%s/Results/Screens/' % os.getcwd()
         file_name = screens
         self.driver.save_screenshot(directory + file_name)
@@ -120,7 +133,6 @@ class Browserstack(object):
             remove_load = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((MobileBy.XPATH, loc2)),
                 message="Element - '" + loc2 + "' did not appear in 20 seconds")
-
 
     def app_background(self):
         self.driver.background_app(3)
@@ -136,5 +148,35 @@ class Browserstack(object):
 
     def driver_go_back(self):
         self.driver.back()
+
+    def search(self, id_news, item, episod, name, title):
+        xmldoc = minidom.parse('search.xml')
+        itemlist = xmldoc.getElementsByTagName(item)
+        linelist = xmldoc.getElementsByTagName(episod)
+        print(linelist)
+        # exit()
+        for s in itemlist:
+            test = s.attributes[name].value
+            self.driver.find_element_by_id(id_news).send_keys(test)
+
+            for e in linelist:
+                episod = e.attributes[title].value
+                self.scroll_to(episod)
+
+                WebDriverWait(self.driver, 20).until(
+                    EC.element_to_be_clickable((MobileBy.XPATH, "//android.widget.TextView[@text='%s']" % episod)),
+                    message="Element - '" + episod + "' did not appear in 20 seconds")
+
+    def scroll_to(self, t):
+        _ = 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("%s").instance(0));' % t
+        self.driver.find_element_by_android_uiautomator(_.encode('utf8'))
+
+    def andr_sc(self, el):
+        self.driver.find_element_by_android_uiautomator(
+            'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("' + el + '").instance(0));')
+
+    def background(self):
+        for x in range(100):
+            self.driver.background_app(2)
 
 #

@@ -1,14 +1,13 @@
 # coding=utf8
 from telnetlib import EC
 from xml.dom import minidom
-from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
-
+from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Br import driver
+from keywords import driver
 
 
 def search(id_news, item, episod, name, title):
