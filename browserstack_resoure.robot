@@ -1,18 +1,12 @@
 *** Settings ***
 Library           AppiumLibrary    timeout=50
-Library           keywords.py
-Library           plugins.py
-
-
+Library           Browserstack.py     ${DEVICE}
+#Library           plugins.py
+#Library           tests.py
 *** Variables ***
 ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 *** Keywords ***
-#
-
-#Я запустил приложение
-#    ${click_new}=                 connect to bs
-## Новости
 
 
 
@@ -221,12 +215,18 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 
 В плеере нажать на видео еще раз
-  click id              com.ipspirates.ort:id/video_panel
+  click id             com.ipspirates.ort:id/vod_video_controls   #com.ipspirates.ort:id/video_panel
 
 Повторно нажать на видео
   Нажать возпроизведение
 Я увидел линию новости
   click id                com.ipspirates.ort:id/seek_bar
+
+Я увидел начало время новости
+  show text id           com.ipspirates.ort:id/time_text
+
+Я увидел время в целом
+  show text id           com.ipspirates.ort:id/duration_text
 
 # На тайминге видео выбрать любое другое время (перемотать видео)
 #  wait until page contains                00:
@@ -479,6 +479,11 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   clear_field           com.ipspirates.ort:id/action_episodes_search
   click id              com.ipspirates.ort:id/action_episodes_search
   search                com.ipspirates.ort:id/search_src_text          item4           episod4     name4       title4
+
+Поиск многопоточный в телепроекте - Новости от Ивана
+  clear_field           com.ipspirates.ort:id/action_episodes_search
+  click id              com.ipspirates.ort:id/action_episodes_search
+  search                com.ipspirates.ort:id/search_src_text          item5           episod5     name5       title5
   clear_field           com.ipspirates.ort:id/action_episodes_search
 
 
@@ -487,3 +492,11 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 Отчистил поиск
   click_id           com.ipspirates.ort:id/search_close_btn
+
+
+
+### Стресс тестирование
+
+
+Приложение свернули и развернули 100 раз
+  background

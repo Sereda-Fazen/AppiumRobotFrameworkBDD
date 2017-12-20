@@ -1,13 +1,14 @@
 # coding=utf8
-import os
 from telnetlib import EC
-from time import sleep
 from xml.dom import minidom
-from selenium.webdriver.support import expected_conditions as EC
+from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
-from selenium.webdriver.support.wait import WebDriverWait
 
-from keywords import driver
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from Br import driver
 
 
 def search(id_news, item, episod, name, title):
@@ -29,12 +30,18 @@ def search(id_news, item, episod, name, title):
                 message="Element - '" + episod + "' did not appear in 20 seconds")
 
 
-
-
 def scroll_to(t):
     _ = 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("%s").instance(0));' % t
     driver.find_element_by_android_uiautomator(_.encode('utf8'))
 
+
 def andr_sc(el):
     driver.find_element_by_android_uiautomator(
         'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("'+el+'").instance(0));')
+
+
+def background():
+    for x in range(100):
+        driver.background_app(2)
+
+
