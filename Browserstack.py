@@ -19,9 +19,9 @@ from selenium.common.exceptions import NoSuchElementException
 
 class Browserstack(object):
 
-    def __init__(self, device):
+    def __init__(self, device, build):
         self._conn = desired_caps_br = {
-            "build": "parallel tests",
+            "build": build,
             "realMobile": True,
             "device": device,
             "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
