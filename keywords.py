@@ -43,13 +43,27 @@ import json
 
 
 
-desired_caps = {}
-desired_caps['unicodeKeyboard'] = 'True'
-desired_caps['platformName'] = 'Android'
-desired_caps['deviceName'] = 'Android Emulator'
-desired_caps['app'] = '/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk'
-desired_caps['resetKeyboard'] = 'True'
-driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+# desired_caps = {}
+# desired_caps['unicodeKeyboard'] = 'True'
+# desired_caps['platformName'] = 'Android'
+# desired_caps['deviceName'] = 'Android Emulator'
+# desired_caps['app'] = '/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk'
+# desired_caps['resetKeyboard'] = 'True'
+# driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+
+
+
+desired_caps_br = {
+    "build": "Samsung Galaxy S7",
+    "realMobile": True,
+    "device": "SamsungGalaxyS7",
+    "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+    "browserstack.debug": True,
+    "browserstack.video": True
+}
+driver = webdriver.Remote('http://eugeneponomarenk1:R5AbyDrPiiBnt3pyaRUi@hub-cloud.browserstack.com/wd/hub',
+                          desired_caps_br)
+
 
 
 def andr_click(click_main):
