@@ -2,7 +2,7 @@
 import os
 from time import sleep
 from xml.dom import minidom
-
+import os, errno
 from SeleniumLibrary.keywords import element
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
@@ -19,8 +19,7 @@ import json
 from pprint import pprint
 
 
-class Browserstack():
-
+class Browserstack(object):
     driver = None
 
     def __new__(cls, build, device):
@@ -40,71 +39,67 @@ class Browserstack():
     def __init__(self, build, device):
         pass
 
-    # desired_caps = {
+    driver = None
+
+    # def __new__(cls, device):
+    #     desired_caps = {
     #         "unicodeKeyboard": True,
     #         "platformName": 'Android',
-    #         "deviceName": "Android Emulator",
-    #         "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13.apk",
+    #         "deviceName": device,
+    #         "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13(91).apk",
     #         "resetKeyboard": True
     #     }
+    #     if cls.driver is None:
+    #         cls.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+    #     return super(Browserstack, cls).__new__(cls, device)
     #
-    # driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+    # def __init__(self, device):
+    #     pass
 
-    def andr_click(self, click_main):
+    def andr_click(self, click_main, name):
         try:
             search_input = WebDriverWait(self.driver, 40).until(
                 EC.element_to_be_clickable((MobileBy.XPATH, click_main)),
                 message="Element - '" + click_main + "' did not appear in 20 seconds").click()
         except:
-            directory = '%s/Results/Errors/' % os.getcwd()
-            file_name = '1.png'
-            self.driver.save_screenshot(directory + file_name)
+            self.take_screens(name)
             raise
 
-    def show_text(self, loc):
+    def show_text(self, loc, name):
         try:
             text_sh = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((MobileBy.XPATH, loc)),
                 message="Element - '" + loc + "' did not appear in 20 seconds")
         except:
-            directory = '%s/Results/Errors/' % os.getcwd()
-            file_name = '1.png'
-            self.driver.save_screenshot(directory + file_name)
+            self.take_screens(name)
             raise
 
-    def show_text_id(self, loc):
+    def show_text_id(self, loc, name):
         try:
-            text_id = WebDriverWait(self.driver, 40).until(
+            text_id = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable((MobileBy.ID, loc)),
                 message="Element - '" + loc + "' did not appear in 20 seconds")
         except:
-            directory = '%s/Results/Errors/' % os.getcwd()
-            file_name = '1.png'
-            self.driver.save_screenshot(directory + file_name)
+            self.take_screens(name)
             raise
 
-    def click_id(self, id_news):
+    def click_id(self, id_news, name):
         try:
             cl_id = WebDriverWait(self.driver, 20).until(
                 EC.element_to_be_clickable((MobileBy.ID, id_news)),
                 message="Element - '" + id_news + "' did not appear in 20 seconds").click()
         except:
-            directory = '%s/Results/Errors/' % os.getcwd()
-            file_name = '1.png'
-            self.driver.save_screenshot(directory + file_name)
+            self.take_screens(name)
             raise
 
-    def send_text(self, id_news, text):
+    def send_text(self, id_news, text, name):
         try:
             wait = WebDriverWait(self.driver, 5).until(
                 EC.element_to_be_clickable((MobileBy.ID, id_news)),
                 message="Element - '" + id_news + "' did not appear in 20 seconds")
             wait.send_keys(text)
         except:
-            directory = '%s/Results/Errors/' % os.getcwd()
-            file_name = '1.png'
-            self.driver.save_screenshot(directory + file_name)
-            raise
+            self.take_screens(name)
 
     def input(self, id, text):
         address = self.driver.find_element_by_id(id)
@@ -184,4 +179,13 @@ class Browserstack():
         for x in range(100):
             self.driver.background_app(2)
 
-
+    def take_screens(self, name):
+        try:
+            os.makedirs('Results/Errors')
+            directory = '%s/Results/Errors/' % os.getcwd()
+            file_name = name + '.png'
+            self.driver.save_screenshot(directory + file_name)
+            raise
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
