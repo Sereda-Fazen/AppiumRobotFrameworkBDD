@@ -27,7 +27,7 @@ class Browserstack(object):
             "build": build,
             "realMobile": True,
             "device": device,
-            "app": "bs://397fecef691a22fd5728da7783fd74aa4361866d",
+            "app": "bs://59ed1a196dc67338ad43e66d3f62f52c553cc0ad",
             "browserstack.debug": True,
             "browserstack.video": True
         }
