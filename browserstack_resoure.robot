@@ -1,6 +1,6 @@
 *** Settings ***
 Library           AppiumLibrary    timeout=50
-Library           Browserstack.py        ${DEVICE}
+Library           Browserstack.py     ${BULID}   ${DEVICE}
 #Library            keywords.py
 #Library           plugins.py
 *** Variables ***
