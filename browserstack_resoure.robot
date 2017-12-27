@@ -1,12 +1,13 @@
 *** Settings ***
-Library           AppiumLibrary    timeout=50
-Library           Browserstack.py     ${BUILD}             ${DEVICE}
+Library           AppiumLibrary    timeout=50   run_on_failure=No Operation
+Library           Browserstack.py               ${DEVICE}
 #Library            keywords.py
 #Library           plugins.py
 *** Variables ***
 ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 *** Keywords ***
+
 
 Новости
   click_id         com.ipspirates.ort:id/nav_drawer_item_news              Новости
@@ -53,7 +54,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   driver_wait
 
 Подтверждение об удалении
-  show text             //android.widget.TextView[@text='Удалить видео с устройства?']            Удалить_видео_с_устройство
+  check_load             //android.widget.TextView[@text='Отменить текущую загрузку?']                //android.widget.TextView[@text='Удалить видео с устройства?']
   click id         com.ipspirates.ort:id/buttonDefaultPositive          Удалить?
   driver_wait
 
@@ -151,7 +152,10 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   input                       com.ipspirates.ort:id/search_src_text              Ургант
   Перейти в раздел телепроекта
 
-
+Поиск невалидный
+  click id              com.ipspirates.ort:id/action_episodes_search             Поиск_эпизоды
+  input                       com.ipspirates.ort:id/search_src_text              "№;%:?*(
+  show text                 //android.widget.TextView[@text='Поиск не дал результатов']          Поиск_невалидный
 
 ### Сохраненные ###
 
@@ -174,6 +178,9 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 Реклама
   show text          //android.widget.TextView[@text='Реклама']                       Реклама
+
+Реклама отсутствует
+  element_does_not_contain_xpath            //android.widget.TextView[@text='Реклама']                       Реклама
 
 Пропустить
   andr click                       //android.widget.Button[@text='Пропустить']             Пропустить
@@ -456,6 +463,21 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 
 
 ### Поиск
+Поиск запроса "до"
+  click id              com.ipspirates.ort:id/search_button             Поиск_эпизоды
+  input                       com.ipspirates.ort:id/search_src_text              До
+
+Вижу передачу - Доброе утро
+  show text              //android.widget.TextView[@text='Доброе утро']         Доброе утро
+
+Вижу передачу - Дорогая переДача
+  show text              //android.widget.TextView[@text='Дорогая переДача']    Дорогая переДача
+Вижу передачу - Жить здорово!
+  show text              //android.widget.TextView[@text='Жить здорово!']       Жить здорово!
+Вижу передачу - Здоровье
+  show text              //android.widget.TextView[@text='Здоровье']            Здоровье
+
+
 
 Поиск многопоточный в телепроекте - Голос
   click id              com.ipspirates.ort:id/action_episodes_search         Поиск

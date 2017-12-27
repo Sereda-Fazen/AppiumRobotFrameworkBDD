@@ -27,7 +27,7 @@ class Browserstack(object):
             "build": build,
             "realMobile": True,
             "device": device,
-            "app": "bs://59ed1a196dc67338ad43e66d3f62f52c553cc0ad",
+            "app": "bs://5bcc7ccf5bea72551194b58935a6fcd0319b8c6a",
             "browserstack.debug": True,
             "browserstack.video": True
         }
@@ -39,18 +39,18 @@ class Browserstack(object):
     def __init__(self, build, device):
         pass
 
-    driver = None
-
+    # driver = None
+    #
     # def __new__(cls, device):
     #     desired_caps = {
     #         "unicodeKeyboard": True,
     #         "platformName": 'Android',
     #         "deviceName": device,
-    #         "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.13(91).apk",
+    #         "app": "/home/alex/RobotFramework/AppiumRobotFrameworkBDD/app/Первый_5.5.14(92).apk",
     #         "resetKeyboard": True
     #     }
     #     if cls.driver is None:
-    #         cls.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+    #         cls.driver = webdriver.Remote('http://172.18.0.1:4444/wd/hub', desired_caps)
     #     return super(Browserstack, cls).__new__(cls, device)
     #
     # def __init__(self, device):
@@ -119,6 +119,16 @@ class Browserstack(object):
             self.driver.save_screenshot(directory + file_name)
             raise
 
+    def element_does_not_contain_xpath(self, elem, name):
+        try:
+            wait_xp = WebDriverWait(self.driver, 5).until(
+                EC.invisibility_of_element_located((By.XPATH, elem)),
+                message="Element - '" + elem + "' is not visible in 20 seconds")
+        except:
+            self.take_screens(name)
+            raise
+
+
     def make_screen(self, screens):
         directory = '%s/Results/Screens/' % os.getcwd()
         file_name = screens
@@ -181,7 +191,6 @@ class Browserstack(object):
 
     def take_screens(self, name):
         try:
-            os.makedirs('Results/Errors')
             directory = '%s/Results/Errors/' % os.getcwd()
             file_name = name + '.png'
             self.driver.save_screenshot(directory + file_name)
