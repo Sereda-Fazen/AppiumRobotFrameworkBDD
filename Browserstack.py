@@ -171,7 +171,7 @@ class Browserstack(object):
 
             for e in linelist:
                 episod = e.attributes[title].value
-                self.scroll_to(episod)
+                self.andr_sc(episod)
 
                 WebDriverWait(self.driver, 20).until(
                     EC.element_to_be_clickable((MobileBy.XPATH, "//android.widget.TextView[@text='%s']" % episod)),
