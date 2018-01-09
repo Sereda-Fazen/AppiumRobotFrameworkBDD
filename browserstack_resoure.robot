@@ -468,6 +468,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   input                       com.ipspirates.ort:id/search_src_text              До
 
 Вижу передачу - Доброе утро
+  andr sc                Доброе утро
   show text              //android.widget.TextView[@text='Доброе утро']         Доброе утро
 
 Вижу передачу - Дорогая переДача
