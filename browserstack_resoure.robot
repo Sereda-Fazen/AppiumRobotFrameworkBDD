@@ -472,6 +472,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   show text              //android.widget.TextView[@text='Доброе утро']         Доброе утро
 
 Вижу передачу - Дорогая переДача
+  andr sc                 Дорогая переДача
   show text              //android.widget.TextView[@text='Дорогая переДача']    Дорогая переДача
 Вижу передачу - Жить здорово!
   andr sc                Жить здорово!
