@@ -22,12 +22,12 @@ from pprint import pprint
 class Browserstack(object):
     driver = None
 
-    def __new__(cls, build, device):
+    def __new__(cls, build, device, app):
         desired_caps_br = {
             "build": build,
             "realMobile": True,
             "device": device,
-            "app": "bs://5bcc7ccf5bea72551194b58935a6fcd0319b8c6a",
+            "app": app,
             "browserstack.debug": True,
             "browserstack.video": True
         }
@@ -36,7 +36,7 @@ class Browserstack(object):
                                           '/wd/hub', desired_caps_br)
         return super().__new__(cls)
 
-    def __init__(self, build, device):
+    def __init__(self, build, device, app):
         pass
 
     # driver = None
