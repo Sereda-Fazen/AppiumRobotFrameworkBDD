@@ -50,7 +50,7 @@ class Browserstack(object):
     #         "resetKeyboard": True
     #     }
     #     if cls.driver is None:
-    #         cls.driver = webdriver.Remote('http://172.18.0.1:4444/wd/hub', desired_caps)
+    #         cls.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
     #     return super(Browserstack, cls).__new__(cls, device)
     #
     # def __init__(self, device):

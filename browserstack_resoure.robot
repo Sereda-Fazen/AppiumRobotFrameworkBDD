@@ -1,6 +1,6 @@
 *** Settings ***
 Library           AppiumLibrary    timeout=50   run_on_failure=No Operation
-Library           Browserstack.py       ${BUILD}        ${DEVICE}
+Library           Browserstack.py              ${DEVICE}
 #Library            keywords.py
 #Library           plugins.py
 *** Variables ***
@@ -473,6 +473,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
 Вижу передачу - Дорогая переДача
   show text              //android.widget.TextView[@text='Дорогая переДача']    Дорогая переДача
 Вижу передачу - Жить здорово!
+  scroll_to                Жить здорово!
   show text              //android.widget.TextView[@text='Жить здорово!']       Жить здорово!
 Вижу передачу - Здоровье
   show text              //android.widget.TextView[@text='Здоровье']            Здоровье
