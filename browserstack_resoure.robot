@@ -478,6 +478,7 @@ ${REMOTE_URL}     http://0.0.0.0:4723/wd/hub
   andr sc                Жить здорово!
   show text              //android.widget.TextView[@text='Жить здорово!']       Жить здорово!
 Вижу передачу - Здоровье
+  andr sc                 Здоровье
   show text              //android.widget.TextView[@text='Здоровье']            Здоровье
 
 
