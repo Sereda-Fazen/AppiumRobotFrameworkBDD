@@ -1,6 +1,6 @@
 *** Settings ***
 Library           AppiumLibrary    timeout=50   run_on_failure=No Operation
-Library           Browserstack.py              ${DEVICE}
+Library           Browserstack.py       ${BUILD}       ${DEVICE}
 #Library            keywords.py
 #Library           plugins.py
 *** Variables ***
